@@ -30,7 +30,11 @@ private:
 	Bullet* m_bullet; 
 	aie::Font*				m_font;
 	enemy*					m_enemy;
+	enemy*					m_enemy2;
+	enemy*					m_enemy3;
 	float					timer;
 	bool					enemyDead;
+	bool					enemyTwoDead;
+	bool					enemyThreeDead;
 	bool					playerDead;
 };

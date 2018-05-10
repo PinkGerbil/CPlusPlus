@@ -23,8 +23,8 @@ public:
 	enemyBullet*				m_EnemyBullet;
 	std::vector<enemyBullet*>	m_activeEnemyBullets;
 	std::vector<enemyBullet*>	m_inActiveEnemyBullets;
+	bool						firstWave;
 
 
 private:
-	bool						firstWave;
 };

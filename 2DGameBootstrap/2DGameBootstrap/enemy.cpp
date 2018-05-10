@@ -13,15 +13,17 @@
 
 enemy::enemy()
 {
+	//initialises the variables
 	timer2 = 0.0f;
 	firstWave = true;
-	m_EnemyTex = new aie::Texture(".../bin/textures/car.png");
 }
 
 enemy::enemy(glm::vec2 * pos)
 {
+	//sets the enemy's texture and position
 	m_EnemyTex = new aie::Texture("../bin/textures/car.png");
 	m_enemyPos = pos;
+	//sets the enemy's bullets
 	for (int i = 0; i < 200; ++i) {
 		m_EnemyBullet = new enemyBullet();
 		m_inActiveEnemyBullets.push_back(m_EnemyBullet);
@@ -31,12 +33,15 @@ enemy::enemy(glm::vec2 * pos)
 
 enemy::~enemy()
 {
+	//deletes the enemy's texture
 	delete m_EnemyTex;
 }
 
 void enemy::Draw(aie::Renderer2D * spriteBatch)
 {
+	//draws the enemy
 	spriteBatch->drawSprite(m_EnemyTex, m_enemyPos->x, m_enemyPos->y, 30.0f, 30.0f, 9.4f);
+	//draws each of the enemy's bullets
 	for (auto it = m_activeEnemyBullets.begin(); it != m_activeEnemyBullets.end(); ++it)
 	{
 		(*it)->Draw(spriteBatch);
@@ -45,7 +50,9 @@ void enemy::Draw(aie::Renderer2D * spriteBatch)
 
 void enemy::Update(float deltaTime)
 {
+	//initalise the timer to deltaTime
 	timer2 += deltaTime;
+	//the enemy shoots another bullet every 0.4 seconds 
 	if (timer2 > 0.4f) {
 		enemyBullet* newenemyBullet;
 		if (m_inActiveEnemyBullets.size() > 0) {
@@ -55,12 +62,15 @@ void enemy::Update(float deltaTime)
 			m_activeEnemyBullets.push_back(newenemyBullet);
 			m_inActiveEnemyBullets.pop_back();
 		}
+		//sets timer back to 0 so it will be able to start the loop again
 		timer2 = 0.0f;
 	}
+	//iterates throught the bullets
 	if (m_activeEnemyBullets.size() >= 1900)
 	{
 		for (auto it = m_activeEnemyBullets.begin(); it != m_activeEnemyBullets.end(); ++it)
 		{
+			//generates each bullet
 			enemyBullet* usedEnemyBullet;
 			if ((*it)->bullEnemyPosY >= 720)
 			{
@@ -73,6 +83,7 @@ void enemy::Update(float deltaTime)
 		}
 	}
 
+	//sets the movement of the enemy so it can move left and right
 	if (m_enemyPos->x <= 1230 && firstWave) {
 		m_enemyPos->x += 200.0f * deltaTime;
 		if (m_enemyPos->x >= 1230)
