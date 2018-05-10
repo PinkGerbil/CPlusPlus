@@ -29,11 +29,16 @@ private:
 	std::vector<Bullet*>	m_inActiveBullets;
 	Bullet*					m_bullet; 
 	aie::Font*				m_font;
-	enemy*					m_enemy;
 	SecondPlayer*			m_SecondPlayer;
+	enemy*					m_enemy;
+	enemy*					m_enemy2;
+	enemy*					m_enemy3;
+	enemy*					m_enemy4;
 	float					timer;
 	bool					playerOneDead;
 	bool					playerTwoDead;
 	bool					enemyDead;
+	bool					enemyTwoDead;
+	bool					enemyThreeDead;
+	bool					enemyFourDead;
 };
-
