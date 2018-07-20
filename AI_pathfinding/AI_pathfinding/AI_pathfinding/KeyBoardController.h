@@ -1,5 +1,5 @@
 #pragma once
-#include "IBehavior.h"
+#include "Behavior.h"
 
 namespace aie {
 	class Input;

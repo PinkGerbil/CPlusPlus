@@ -45,9 +45,6 @@
     <ClCompile Include="KeyBoardController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FleeState.cpp">
       <Filter>Source Files\Behaviour</Filter>
     </ClCompile>
@@ -81,6 +78,15 @@
     <ClCompile Include="SpriteObject.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorChange.cpp">
+      <Filter>Source Files\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Behavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI_pathfindingApp.h">
@@ -90,12 +96,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyBoardController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IBehavior.h">
@@ -130,6 +130,15 @@
     </ClInclude>
     <ClInclude Include="SpriteObject.h">
       <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Behavior.h">
+      <Filter>Header Files\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorChange.h">
+      <Filter>Header Files\Behaviour</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

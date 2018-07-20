@@ -7,7 +7,7 @@ namespace aie {
 	class Renderer2D;
 };
 
-class Matrix3;
+
 class SceneObject
 {
 public:

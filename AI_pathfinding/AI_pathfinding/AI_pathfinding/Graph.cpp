@@ -19,26 +19,31 @@ std::vector<GraphNode*> Graph::GetNodes()
 	return m_nodes; 
 }
 
-std::vector<GraphNode*> Graph::DFS(GraphNode * startNode, GraphNode * endNode)
-{
-	std::stack<GraphNode*> nodeStack; 
-	nodeStack.push(startNode);
-	while (!nodeStack.empty())
-	{
-		//get the top off the stack and remove it
-		GraphNode* currentNode = nodeStack.top();
-		//remove top item from stack
-		nodeStack.pop();
-		//mark as traversed
-		currentNode->SetVisited(true);
-		//loop through all edges of current node
-		for (auto e : currentNode->GetConnections) {
-			if (!e->GetNode()->GetVisited()) {
-				nodeStack.push(e->GetNode());
+//std::vector<GraphNode*> Graph::DFS(GraphNode * startNode, GraphNode * endNode)
+//{
+//	std::stack<GraphNode*> nodeStack; 
+//	nodeStack.push(startNode);
+//	while (!nodeStack.empty())
+//	{
+//		//get the top off the stack and remove it
+//		GraphNode* currentNode = nodeStack.top();
+//		//remove top item from stack
+//		nodeStack.pop();
+//		//mark as traversed
+//		currentNode->SetVisited(true);
+//		//loop through all edges of current node
+//	//	for (auto e : currentNode->GetConnections) {
+//	//		if (!e->GetNode()->GetVisited()) {
+//	//			nodeStack.push(e->GetNode());
+//	//
+//	//		}
+//	//	}
+//	}
+//}
 
-			}
-		}
-	}
+std::vector<GraphNode*> Graph::DjikstraSearch(GraphNode * startNode, GraphNode * endNode)
+{
+	return std::vector<GraphNode*>();
 }
 
 void Graph::Draw(aie::Renderer2D * renderer)

@@ -1,11 +1,13 @@
 #pragma once
-#include "IBehavior.h"
-class FleeState : public IBehavior
+#include "Behavior.h"
+class FleeState : public Behavior
 {
 public:
 	FleeState();
 	FleeState(Agent* target);
-	void update(Agent* agent, float deltaTime);
+	virtual void update(Agent* agent, BehaviorChange* bc, float deltaTime);
+	virtual void init(Agent* agent) {}
+	virtual void exit(Agent* agent) {}
 	~FleeState();
 
 private:

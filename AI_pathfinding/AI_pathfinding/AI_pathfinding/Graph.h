@@ -2,6 +2,7 @@
 #include "GraphEdge.h"
 #include "GraphNode.h"
 #include <Renderer2D.h>
+#include <list>
 
 namespace aie {
 	class Renderer2D;
@@ -18,6 +19,8 @@ public:
 	std::vector<GraphNode*> GetNodes(); 
 
 	std::vector<GraphNode*> DFS(GraphNode* startNode, GraphNode* endNode);
+
+	std::vector<GraphNode*> DjikstraSearch(GraphNode* startNode, GraphNode* endNode); 
 
 	void Draw(aie::Renderer2D * renderer);
 

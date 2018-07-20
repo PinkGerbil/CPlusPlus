@@ -2,9 +2,12 @@
 
 #include "Application.h"
 #include "Renderer2D.h"
+#include <Matrix3.h>
+#include <glm\vec2.hpp>
 #include "SpriteObject.h"
-#include "GameObject.h"
+//class GameObject;
 
+class Agent;
 class AI_pathfindingApp : public aie::Application {
 public:
 
@@ -22,7 +25,8 @@ protected:
 	float				windowWidth;
 	float				windowHeight;
 	float				timer;
-	Vector3				position;
+	float				PHealth; 
+	//Vector2				spawn; 
 	glm::vec2			pos;
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
@@ -33,4 +37,9 @@ protected:
 	Agent*				m_enemy;
 	Agent*				m_enemyWan;
 	Agent*				m_enemyFlee;
+	/*BehaviorChange*		m_stateMachine;*/
+	bool die;
+	bool enemyDie;
+	bool enemyWanDie;
+	bool enemyFleeDie;
 };

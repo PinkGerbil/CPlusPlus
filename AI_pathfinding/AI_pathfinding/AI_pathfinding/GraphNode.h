@@ -22,10 +22,15 @@ public:
 	void SetParent(GraphNode* node);
 	Vector2 GetParent(); 
 
-private:
-	bool m_isVisited;
-	Vector2				m_position;
-	std::vector<GraphEdge*>  m_connections;
+	void SetGScore(float gScore);;
+	float GetGScore(); 
 
+
+private:
+	GraphNode *					m_parent;
+	bool						m_isVisited;
+	Vector2						m_position;
+	std::vector<GraphEdge*>		m_connections;
+	float						m_gScore;
 };
 

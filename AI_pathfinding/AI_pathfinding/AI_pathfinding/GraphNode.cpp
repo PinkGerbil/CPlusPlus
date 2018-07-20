@@ -54,3 +54,12 @@ Vector2 GraphNode::GetParent()
 {
 	return Vector2();
 }
+
+void GraphNode::SetGScore(float gScore)
+{
+}
+
+float GraphNode::GetGScore()
+{
+	return 0.0f;
+}
