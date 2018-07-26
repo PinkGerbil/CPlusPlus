@@ -21,19 +21,50 @@ bool AI_pathfindingApp::startup() {
 	timer = 0.0f;
 	windowWidth = getWindowWidth();
 	windowHeight = getWindowHeight();
-	//spawn = (40, 40); 
+	spawn = Vector2 (40, 40); 
 	m_2dRenderer = new aie::Renderer2D();
 
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
+	/*Graphs*/
+	m_graph = new Graph();
+	/*set up the graph nodes*/
+	for (int i = 0; i < 50; ++i)
+	{
+		for (int j = 0; j < 50; ++j)
+		{
+			GraphNode* node = new GraphNode();
+			node->SetPosition(Vector2(i * 32, j * 32));
+			m_graph->AddNode(node);
+		}
+	}
+
+	for (auto x : m_graph->GetNodes())
+	{
+		for (auto y : m_graph->GetNodes())
+		{
+			if (x == y)
+				continue;
+
+			// find the distance btw x and y node
+			int xDist = x->GetPosition().m_x - y->GetPosition().m_x;
+			int yDist = x->GetPosition().m_y - y->GetPosition().m_y;
+			// find the magnitude
+			int mag = sqrt((xDist * xDist) + (yDist * yDist)); 
+			// check the length with scalar value 
+			if (mag <= 50 && mag >= -50) {
+				m_graph->ConnectNode(x, y); 
+			}
+		}
+	}
+
+
 	/*Player*/	
 	m_player = new Agent(new aie::Texture("../bin/textures/ship.png"), Vector2(40, 40)); 
 	m_player->AddBehaviour(new KeyBoardController(aie::Input::getInstance()));
-	//m_player->AddBehaviour(new BehaviorChange(new SeekBehaviour(m_enemy)));
 	m_player->setHealth(3); 
-	PHealth = m_player->getHealth(); 
 
 	/*enemies*/
 	m_enemy = new Agent(new aie::Texture("../bin/textures/carPolice.png"), Vector2(800, 100));
@@ -68,6 +99,7 @@ void AI_pathfindingApp::shutdown() {
 
 void AI_pathfindingApp::update(float deltaTime) {
 	/*input example*/
+	PHealth = m_player->getHealth();
 	timer += deltaTime;
 	aie::Input* input = aie::Input::getInstance();
 
@@ -101,15 +133,13 @@ void AI_pathfindingApp::update(float deltaTime) {
 		m_player->Update(deltaTime);
 	}
 	else {
+		if (input->wasKeyPressed(aie::INPUT_KEY_R) && m_player->getHealth() > 0)
+		{
+			m_player->setPosition(spawn); 
+			m_player->setHealth(m_player->getHealth() - 1); 
+			die = false; 
+		}
 	}
-	//else {
-	//	if (input->wasKeyPressed(aie::INPUT_KEY_R) && m_player->getHealth() > 0)
-	//	{
-	//		m_player->setPosition(Vector2 (40,40)); 
-	//		m_player->setHealth(m_player->getHealth() - 1); 
-	//		die = false; 
-	//	}
-	//}
 
 	if (m_enemy->position.m_x > getWindowWidth() + 100) {
 		m_enemy->position.m_x = -95;
@@ -159,8 +189,7 @@ void AI_pathfindingApp::draw() {
 
 	// draw your stuff here!
 	m_background.draw(m_2dRenderer);
-
-
+	/*death functions*/
 	if(!die){
 		m_player->draw(m_2dRenderer);
 		m_2dRenderer->drawText(m_font, "Space Cowboy", m_player->position.m_x - 110, m_player->position.m_y + 30);
@@ -175,6 +204,9 @@ void AI_pathfindingApp::draw() {
 		m_enemyFlee->draw(m_2dRenderer);
 		m_2dRenderer->drawText(m_font, "Scaredy Boi", m_enemyFlee->position.m_x - 110, m_enemyFlee->position.m_y + 30);
 	}
+
+	/*graph*/
+	m_graph->Draw(m_2dRenderer);
 
 	// output some text, uses the last used colour
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);

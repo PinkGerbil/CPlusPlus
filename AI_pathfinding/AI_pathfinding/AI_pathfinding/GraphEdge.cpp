@@ -4,6 +4,7 @@
 
 GraphEdge::GraphEdge()
 {
+	m_target = nullptr;
 }
 
 void GraphEdge::SetNode(GraphNode* target)
@@ -19,4 +20,5 @@ GraphNode * GraphEdge::GetNode()
 
 GraphEdge::~GraphEdge()
 {
+	delete m_target; 
 }

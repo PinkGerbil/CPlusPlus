@@ -3,8 +3,10 @@
 
 GraphNode::GraphNode()
 {
+	m_parent = nullptr;
 	m_position = Vector2(0, 0);
 	m_isVisited = false;
+	m_gScore = 0;
 }
 
 void GraphNode::SetPosition(Vector2 position)
@@ -27,20 +29,22 @@ bool GraphNode::GetVisited()
 	return m_isVisited;
 }
 
-void GraphNode::AddConnections(GraphEdge* node)
+void GraphNode::AddConnections(GraphNode* node)
 {
 	GraphEdge* edge = new GraphEdge(); 
-	//edge->SetNode();
+	edge->SetNode(node);
+	m_connections.push_back(edge);
 }
 
 std::vector<GraphEdge*> GraphNode::GetConnections()
 {
-	return std::vector<GraphEdge*>();
+	return m_connections; 
 }
 
 
 GraphNode::~GraphNode()
 {
+	delete m_parent; 
 	for (auto c : m_connections) {
 		delete c; 
 	}
@@ -48,18 +52,20 @@ GraphNode::~GraphNode()
 
 void GraphNode::SetParent(GraphNode * node)
 {
+	m_parent = node; 
 }
 
 Vector2 GraphNode::GetParent()
 {
-	return Vector2();
+	return m_parent->GetPosition(); 
 }
 
 void GraphNode::SetGScore(float gScore)
 {
+	m_gScore = gScore; 
 }
 
 float GraphNode::GetGScore()
 {
-	return 0.0f;
+	return m_gScore; 
 }

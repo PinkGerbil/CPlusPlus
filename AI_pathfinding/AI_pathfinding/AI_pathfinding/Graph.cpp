@@ -8,10 +8,12 @@ Graph::Graph()
 
 void Graph::AddNode(GraphNode * node)
 {
+	m_nodes.push_back(node);
 }
 
 void Graph::ConnectNode(GraphNode * a, GraphNode * b)
 {
+	a->AddConnections(b);
 }
 
 std::vector<GraphNode*> Graph::GetNodes()
@@ -32,19 +34,19 @@ std::vector<GraphNode*> Graph::GetNodes()
 //		//mark as traversed
 //		currentNode->SetVisited(true);
 //		//loop through all edges of current node
-//	//	for (auto e : currentNode->GetConnections) {
-//	//		if (!e->GetNode()->GetVisited()) {
-//	//			nodeStack.push(e->GetNode());
-//	//
-//	//		}
-//	//	}
+//		for (auto e : currentNode->GetConnections) {
+//			if (!e->GetNode()->GetVisited()) {
+//				nodeStack.push(e->GetNode());
+//	
+//			}
+//		}
 //	}
 //}
 
-std::vector<GraphNode*> Graph::DjikstraSearch(GraphNode * startNode, GraphNode * endNode)
-{
-	return std::vector<GraphNode*>();
-}
+//std::vector<GraphNode*> Graph::DjikstraSearch(GraphNode * startNode, GraphNode * endNode)
+//{
+//	return std::vector<GraphNode*>();
+//}
 
 void Graph::Draw(aie::Renderer2D * renderer)
 {
@@ -52,7 +54,7 @@ void Graph::Draw(aie::Renderer2D * renderer)
 		for (auto it : node->GetConnections()) {
 			renderer->drawLine(node->GetPosition().m_x, node->GetPosition().m_y, it->GetNode()->GetPosition().m_x, it->GetNode()->GetPosition().m_y);
 		}
-		renderer->drawCircle(node->GetPosition().m_x, node->GetPosition().m_y, 20.0f);
+		renderer->drawCircle(node->GetPosition().m_x, node->GetPosition().m_y, 2.0f);
 	}
 }
 
